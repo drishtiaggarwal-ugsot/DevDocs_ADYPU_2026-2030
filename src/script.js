@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Fetch the data from data.json
     async function fetchDocs() {
         try {
-            // Added cache busting for local dev
             const response = await fetch('data.json?t=' + new Date().getTime());
             if (!response.ok) throw new Error('Failed to fetch data');
             
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Setup Category Filters dynamically based on data
     function setupFilters() {
-        // Extract unique categories
         const categories = ['All', ...new Set(allDocs.map(doc => doc.category))];
         
         filtersContainer.innerHTML = categories.map(cat => `
@@ -38,15 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </button>
         `).join('');
 
-        // Add event listeners to filter buttons
         const filterBtns = document.querySelectorAll('.filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Update active state
                 filterBtns.forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 
-                // Set current category and filter
                 currentCategory = e.target.getAttribute('data-category');
                 filterAndRender();
             });
@@ -75,7 +70,56 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // 4. Combined Filter and Search Logic
+    // Levenshtein Distance Helper for Fuzzy Search
+    function getLevenshteinDistance(a, b) {
+        const matrix = [];
+
+        for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+        }
+
+        for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+        }
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1, // substitution
+                        Math.min(
+                            matrix[i][j - 1] + 1, // insertion
+                            matrix[i - 1][j] + 1  // deletion
+                        )
+                    );
+                }
+            }
+        }
+
+        return matrix[b.length][a.length];
+    }
+
+    // Check if a text or any word within it matches the search term closely
+    function isCloseMatch(text, searchTerm) {
+        if (!text) return false;
+        const lowerText = text.toLowerCase();
+        
+        // Exact substring match (handles normal searches instantly)
+        if (lowerText.includes(searchTerm)) return true;
+
+        // Fuzzy match on individual words
+        const words = lowerText.split(/\s+/);
+        const maxDistance = searchTerm.length > 5 ? 2 : 1;
+
+        return words.some(word => {
+            if (Math.abs(word.length - searchTerm.length) > maxDistance) return false;
+            return getLevenshteinDistance(word, searchTerm) <= maxDistance;
+        });
+    }
+
+    // 4. Combined Filter and Search Logic with Fuzzy Matching
     function filterAndRender() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
@@ -83,11 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Category match
             const matchesCategory = currentCategory === 'All' || doc.category === currentCategory;
             
-            // Search match (title, description, tags)
+            // Search match across title, description, and tags with typo support
             const matchesSearch = 
-                doc.title.toLowerCase().includes(searchTerm) || 
-                doc.description.toLowerCase().includes(searchTerm) ||
-                doc.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                !searchTerm ||
+                isCloseMatch(doc.title, searchTerm) || 
+                isCloseMatch(doc.description, searchTerm) ||
+                doc.tags.some(tag => isCloseMatch(tag, searchTerm));
                 
             return matchesCategory && matchesSearch;
         });
