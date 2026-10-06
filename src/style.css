@@ -322,4 +322,9 @@ body {
 .footer-links a:hover {
     color: var(--accent-color);
 }
-
+.star-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: black;
+}
