@@ -1,71 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DevDocs Collection | Open Source</title>
-    <meta name="description" content="A community-driven collection of essential developer documentations and resources.">
+    <meta
+      name="description"
+      content="A community-driven collection of essential developer documentations and resources."
+    />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="container navbar-inner">
-            <div class="nav-brand">
-                DevDocs
-            </div>
-            <div class="nav-links">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="https://github.com/uGSOT/DevDocs/blob/main/CONTRIBUTING.md" class="nav-link" target="_blank">Contribute</a>
-            </div>
+      <div class="container navbar-inner">
+        <div class="nav-brand">DevDocs</div>
+        <div class="nav-links">
+          <a href="#" class="nav-link active">Home</a>
+          <a
+            href="https://github.com/uGSOT/DevDocs/blob/main/CONTRIBUTING.md"
+            class="nav-link"
+            target="_blank"
+            >Contribute</a
+          >
+          <a
+            class="star-link"
+            href="https://github.com/OWNER/REPO"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ⭐ Star us on GitHub
+          </a>
         </div>
+      </div>
     </nav>
 
-
     <header class="header">
-        <div class="container hero-container">
-            <h1 class="hero-title">Developer Documentation</h1>
-            <p class="hero-subtitle">A curated collection of essential developer resources, guides, and tools.</p>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search resources (e.g., React, CSS)..." aria-label="Search documentation">
-            </div>
+      <div class="container hero-container">
+        <h1 class="hero-title">Developer Documentation</h1>
+        <p class="hero-subtitle">
+          A curated collection of essential developer resources, guides, and
+          tools.
+        </p>
+
+        <div class="search-container">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search resources (e.g., React, CSS)..."
+            aria-label="Search documentation"
+          />
         </div>
+      </div>
     </header>
 
     <main class="main-content container">
-        <div id="loading" class="loading">Loading resources...</div>
-        
-        <div class="filters" id="filters">
-            <!-- Filter buttons will be injected here by JS -->
-        </div>
+      <div id="loading" class="loading">Loading resources...</div>
 
-        <div class="docs-grid" id="docsGrid">
-            <!-- Cards will be injected here by JS -->
-        </div>
-        
-        <div id="noResults" class="no-results hidden">
-            <p>No documentation found matching your search.</p>
-        </div>
+      <div class="filters" id="filters">
+        <!-- Filter buttons will be injected here by JS -->
+      </div>
+
+      <div class="docs-grid" id="docsGrid">
+        <!-- Cards will be injected here by JS -->
+      </div>
+
+      <div id="noResults" class="no-results hidden">
+        <p>No documentation found matching your search.</p>
+      </div>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>Made with ❤️ by Web Dev Team UgSOT.</p>
-                <div class="footer-links">
-                    <a href="https://github.com/uGSOT/DevDocs/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contribution Guide</a>
-                    <a href="https://github.com/uGSOT/DevDocs" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="footer-content">
+          <p>Made with ❤️ by Web Dev Team UgSOT.</p>
+          <div class="footer-links">
+            <a
+              href="https://github.com/uGSOT/DevDocs/blob/main/CONTRIBUTING.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Contribution Guide</a
+            >
+            <a
+              href="https://github.com/uGSOT/DevDocs"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub Repository</a
+            >
+          </div>
         </div>
+      </div>
     </footer>
 
     <!-- Custom JS -->
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
