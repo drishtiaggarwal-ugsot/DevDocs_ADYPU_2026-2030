@@ -4,10 +4,11 @@
     --card-bg: #ffffff;
     --text-primary: #0a0a0a;
     --text-secondary: #525252;
-    --accent-color: #e50913; /* specified pure red */
+    --accent-color: #e50913;
+    /* specified pure red */
     --accent-hover: #b8070f;
     --border-color: #e5e5e5;
-    
+
     /* Tag Colors */
     --tag-bg: rgba(229, 9, 19, 0.1);
     --tag-text: #e50913;
@@ -74,7 +75,8 @@ body {
     transition: color 0.2s;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: white;
 }
 
@@ -92,7 +94,8 @@ body {
     color: var(--text-primary);
     text-align: center;
     padding: 3.5rem 1.5rem 4rem;
-    margin-top: 60px; /* offset for fixed navbar */
+    margin-top: 60px;
+    /* offset for fixed navbar */
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-color);
 }
@@ -222,13 +225,21 @@ body {
     border-color: #d4d4d4;
 }
 
+/* Card Meta Layout */
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .card-category {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--accent-hover);
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -243,6 +254,20 @@ body {
     background: var(--accent-color);
 }
 
+/* Reading Time Badge */
+.reading-time {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--border-color);
+}
+
 .card-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -254,7 +279,8 @@ body {
     color: var(--text-secondary);
     font-size: 1rem;
     margin-bottom: 1.5rem;
-    flex: 1; /* Pushes tags to bottom */
+    flex: 1;
+    /* Pushes tags to bottom */
 }
 
 .card-tags {
@@ -322,4 +348,3 @@ body {
 .footer-links a:hover {
     color: var(--accent-color);
 }
-
