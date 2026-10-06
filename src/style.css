@@ -323,3 +323,24 @@ body {
     color: var(--accent-color);
 }
 
+.github-star-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.github-star-btn:hover {
+    background: white;
+    color: var(--accent-color);
+    border-color: white;
+    transform: translateY(-1px);
+}
