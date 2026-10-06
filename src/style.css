@@ -64,10 +64,14 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 1.25rem;
 }
 
 .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
@@ -112,10 +116,33 @@ body {
 .hero-subtitle {
     font-size: 1.1rem;
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.github-star-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-sm);
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.github-star-link:hover {
+    background-color: white;
+    border-color: white;
+    color: var(--accent-color);
+    transform: translateY(-1px);
 }
 
 .search-container {
