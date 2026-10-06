@@ -323,3 +323,17 @@ body {
     color: var(--accent-color);
 }
 
+/* Style for the Star us on GitHub button */
+.nav-links .star-btn {
+    background-color: #2ea44f; /* GitHub green or match your theme */
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.nav-links .star-btn:hover {
+    background-color: #2c974b;
+    text-decoration: none;
+}
