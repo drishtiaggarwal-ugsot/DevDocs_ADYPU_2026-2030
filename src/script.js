@@ -75,6 +75,59 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    function editDistance(first, second) {
+        const distances = Array.from(
+            { length: first.length + 1 },
+            () => Array(second.length + 1).fill(0)
+        );
+
+        for (let i = 0; i <= first.length; i++) distances[i][0] = i;
+        for (let j = 0; j <= second.length; j++) distances[0][j] = j;
+
+        for (let i = 1; i <= first.length; i++) {
+            for (let j = 1; j <= second.length; j++) {
+                const substitutionCost = first[i - 1] === second[j - 1] ? 0 : 1;
+                distances[i][j] = Math.min(
+                    distances[i - 1][j] + 1,
+                    distances[i][j - 1] + 1,
+                    distances[i - 1][j - 1] + substitutionCost
+                );
+
+                if (
+                    i > 1 &&
+                    j > 1 &&
+                    first[i - 1] === second[j - 2] &&
+                    first[i - 2] === second[j - 1]
+                ) {
+                    distances[i][j] = Math.min(distances[i][j], distances[i - 2][j - 2] + 1);
+                }
+            }
+        }
+
+        return distances[first.length][second.length];
+    }
+
+    function matchesSearch(doc, searchTerm) {
+        const searchableText = [
+            doc.title,
+            doc.description,
+            ...doc.tags
+        ].join(' ').toLowerCase();
+
+        if (searchableText.includes(searchTerm)) return true;
+
+        const searchWords = searchTerm.split(/\s+/);
+        const searchableWords = searchableText.match(/[a-z0-9]+/g) || [];
+
+        return searchWords.every(searchWord => {
+            const maxDistance = searchWord.length >= 8 ? 2 : 1;
+            return searchableWords.some(searchableWord =>
+                Math.abs(searchableWord.length - searchWord.length) <= maxDistance &&
+                editDistance(searchWord, searchableWord) <= maxDistance
+            );
+        });
+    }
+
     // 4. Combined Filter and Search Logic
     function filterAndRender() {
         const searchTerm = searchInput.value.toLowerCase().trim();
@@ -84,12 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesCategory = currentCategory === 'All' || doc.category === currentCategory;
             
             // Search match (title, description, tags)
-            const matchesSearch = 
-                doc.title.toLowerCase().includes(searchTerm) || 
-                doc.description.toLowerCase().includes(searchTerm) ||
-                doc.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            const searchMatches = !searchTerm || matchesSearch(doc, searchTerm);
                 
-            return matchesCategory && matchesSearch;
+            return matchesCategory && searchMatches;
         });
 
         renderDocs(filteredDocs);
